@@ -8,7 +8,10 @@ USER ?= `cat /tmp/env-user`
 
 # This recipe is for solo-installment, not for "parent" Makefile
 install:
-	$(MAKE) ${MYOS} plugins
+	brew install reattach-to-user-namespace
+	# ^ have to install this first otherwise tmux will flash exit
+	$(MAKE) install-${MYOS}
+	$(MAKE) install-plugins
 
 checkhealth_mac:
 	brew --version
@@ -18,22 +21,23 @@ checkhealth_debian:
 	apt-get --version
 	git --version
 
-mac: checkhealth_mac
+checkhealth:
+	tmux -V
+
+install-mac: checkhealth_mac
 	brew install tmux
+	ln -sf ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf
 	@echo "OK."
 
-debian: checkhealth_debian
+install-debian: checkhealth_debian
 	sudo apt-get install tmux -y
 	ln -sf ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf
 	@echo "OK."
 
-ubuntu: debian
-raspbian: debian
+install-ubuntu: debian
+install-raspbian: debian
 
-checkhealth:
-	tmux -V
-
-plugins: checkhealth
+install-plugins: checkhealth
 	@echo "----------[  Installing TPM for Tmux   ]--------------"
 	export TMUX_PLUGIN_MANAGER_PATH='~/.tmux/plugins'
 	mv ~/.tmux/plugins ~/.tmux/plugins`date +%F` ||echo
