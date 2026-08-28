@@ -1,5 +1,5 @@
-# Vendored + patched copy of jimeh/tmux-themepack's
-# powerline/double/magenta.tmuxtheme (https://github.com/jimeh/tmux-themepack)
+# Vendored + patched copy of:
+# https://github.com/jimeh/tmux-themepack/blob/master/powerline/double/magenta.tmuxtheme
 # U+E0B0/U+E0B2 Powerline hard-arrow glyphs replaced with '>' / '<' —
 # those PUA codepoints render as boxes/dots without an exact-matching
 # patched font; plain ASCII needs none.
