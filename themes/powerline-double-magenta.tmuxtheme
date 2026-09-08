@@ -4,10 +4,7 @@
 # codepoints render as boxes/dots without an exact-matching patched font,
 # and adjacent color blocks alone read fine as segment separators.
 #
-# Gotcha: @theme-*/@powerline-* vars below are set with -o (only-if-unset),
-# so a plain `source-file`/<prefix>L reload on an already-running server
-# WON'T pick up edits to their values — the vars are already set from last
-# time. Either `tmux kill-server` or `set-option -gu @the-var-name` first.
+# Gotcha: @theme-*/@powerline-* vars use -o, so a reload won't re-apply edited values — `tmux kill-server` or `set-option -gu @the-var-name` first.
 
 #
 # Powerline Double Magenta - Tmux Themepack
@@ -108,16 +105,8 @@ set -goq  @theme-pane-active-border-bg default
 set -goqF @theme-pane-active-border-fg "#{@powerline-color-main-1}"
 set -goq  @theme-pane-border-bg default
 set -goqF @theme-pane-border-fg "#{@powerline-color-grey-3}"
-# Note: colour125 hardcoded (not #{@powerline-color-*}) since -F below must not
-# eagerly evaluate #P/#{pane_current_command}/pane_active; keep in sync with
-# main-1 above. Solid bg-fill (not just fg/bold) so the bottom border-status
-# row reads as an obvious highlighted bar without touching the plain
-# single-line left/right pane dividers (those stay on pane-active-border-style
-# above, unbolded). #{pane_current_command} (not #T) so the title tracks
-# whatever's actually running (nvim, claude, zsh, ...) with no manual rename.
-# The regex substitution maps Claude Code's self-renamed process title (its
-# own version string, e.g. "2.1.263") back to "claude" for display.
-set -goq  @theme-pane-border-format "#{?pane_active,#[bg=colour125#,fg=white#,bold],#[fg=colour243]} [#P] #{s/^[0-9]+\\.[0-9]+\\.[0-9]+$/claude/:pane_current_command} #[bg=default]"
+# colour125 hardcoded here (not #{@powerline-color-*}) since -F below must not eagerly evaluate #P/pane_active; keep in sync with main-1 above.
+set -goq  @theme-pane-border-format "#{?pane_active,#[fg=colour125#,bold],#[fg=colour243]} [#P] #{s/^[0-9]+\\.[0-9]+\\.[0-9]+$/claude/:pane_current_command} "
 set -goq  @theme-pane-border-indicators off
 set -goqF @theme-status-bg "#{@powerline-status-bg}"
 set -goqF @theme-status-fg "#{@powerline-status-fg}"
