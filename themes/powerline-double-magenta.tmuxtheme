@@ -104,7 +104,7 @@ set -goqF @theme-window-status-activity-fg "#{@powerline-color-activity-1}"
 set -goq  @theme-window-status-separator ""
 set -goqF @theme-window-status-bg "#{@theme-status-bg}"
 set -goqF @theme-window-status-fg "#{@powerline-color-grey-6}"
-set -goqF @theme-window-status-current-bg "#{@powerline-color-main-1}"
+set -goqF @theme-window-status-current-bg "#{@powerline-color-grey-4}"
 set -goqF @theme-window-status-current-fg white
 set -goqF @theme-window-status-format "  #{@themepack-window-status-format}  "
 set -goqF @theme-window-status-current-format "#[fg=#{@theme-status-bg},bg=#{@theme-window-status-current-bg}]#[fg=#{@theme-window-status-current-fg},nobold,underscore] #{@themepack-window-status-current-format} #[fg=#{@theme-status-bg},bg=#{@theme-window-status-current-bg},nobold]"
