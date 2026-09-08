@@ -3,6 +3,11 @@
 # U+E0B0/U+E0B2 Powerline hard-arrow glyphs dropped entirely — those PUA
 # codepoints render as boxes/dots without an exact-matching patched font,
 # and adjacent color blocks alone read fine as segment separators.
+#
+# Gotcha: @theme-*/@powerline-* vars below are set with -o (only-if-unset),
+# so a plain `source-file`/<prefix>L reload on an already-running server
+# WON'T pick up edits to their values — the vars are already set from last
+# time. Either `tmux kill-server` or `set-option -gu @the-var-name` first.
 
 #
 # Powerline Double Magenta - Tmux Themepack
@@ -103,6 +108,17 @@ set -goq  @theme-pane-active-border-bg default
 set -goqF @theme-pane-active-border-fg "#{@powerline-color-main-1}"
 set -goq  @theme-pane-border-bg default
 set -goqF @theme-pane-border-fg "#{@powerline-color-grey-3}"
+# Note: colour125 hardcoded (not #{@powerline-color-*}) since -F below must not
+# eagerly evaluate #P/#{pane_current_command}/pane_active; keep in sync with
+# main-1 above. Solid bg-fill (not just fg/bold) so the bottom border-status
+# row reads as an obvious highlighted bar without touching the plain
+# single-line left/right pane dividers (those stay on pane-active-border-style
+# above, unbolded). #{pane_current_command} (not #T) so the title tracks
+# whatever's actually running (nvim, claude, zsh, ...) with no manual rename.
+# The regex substitution maps Claude Code's self-renamed process title (its
+# own version string, e.g. "2.1.263") back to "claude" for display.
+set -goq  @theme-pane-border-format "#{?pane_active,#[bg=colour125#,fg=white#,bold],#[fg=colour243]} [#P] #{s/^[0-9]+\\.[0-9]+\\.[0-9]+$/claude/:pane_current_command} #[bg=default]"
+set -goq  @theme-pane-border-indicators off
 set -goqF @theme-status-bg "#{@powerline-status-bg}"
 set -goqF @theme-status-fg "#{@powerline-status-fg}"
 set -goq  @theme-status-interval 1
@@ -158,6 +174,8 @@ set -gwF clock-mode-style "#{@theme-clock-mode-style}"
 set -gwF mode-style "fg=#{@theme-mode-fg},bg=#{@theme-mode-bg}"
 set -gwF pane-active-border-style "fg=#{@theme-pane-active-border-fg},bg=#{@theme-pane-active-border-bg}"
 set -gwF pane-border-style "fg=#{@theme-pane-border-fg},bg=#{@theme-pane-border-bg}"
+set -gwF pane-border-format "#{@theme-pane-border-format}"
+set -gwF pane-border-indicators "#{@theme-pane-border-indicators}"
 set -gwF window-status-activity-style "fg=#{@theme-window-status-activity-fg},bg=#{@theme-window-status-activity-bg}"
 set -gwF window-status-current-format "#{@theme-window-status-current-format}"
 set -gwF window-status-current-style "fg=#{@theme-window-status-current-fg},bg=#{@theme-window-status-current-bg}"
