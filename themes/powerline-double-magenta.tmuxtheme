@@ -106,7 +106,7 @@ set -goqF @theme-pane-active-border-fg "#{@powerline-color-grey-3}"
 set -goq  @theme-pane-border-bg default
 set -goqF @theme-pane-border-fg "#{@powerline-color-grey-3}"
 # colour125 hardcoded here (not #{@powerline-color-*}) since -F below must not eagerly evaluate #P/pane_active; keep in sync with main-1 above.
-set -goq  @theme-pane-border-format "#{?pane_active,#[bg=colour125#,fg=white#,bold],#[fg=colour243]} [#P] #{s/^[0-9]+\\.[0-9]+\\.[0-9]+$/claude/:pane_current_command} #[bg=default]"
+set -goq  @theme-pane-border-format "#{?pane_active,#[bg=colour125#,fg=white#,bold],#[fg=colour243]}   [#P] #{s/^[0-9]+\\.[0-9]+\\.[0-9]+$/claude/:pane_current_command}   #[bg=default]"
 set -goq  @theme-pane-border-indicators off
 set -goqF @theme-status-bg "#{@powerline-status-bg}"
 set -goqF @theme-status-fg "#{@powerline-status-fg}"
