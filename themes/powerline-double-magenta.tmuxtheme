@@ -108,6 +108,7 @@ set -goqF @theme-pane-border-fg "#{@powerline-color-grey-3}"
 # colour125 hardcoded here (not #{@powerline-color-*}) since -F below must not eagerly evaluate #P/pane_active; keep in sync with main-1 above.
 set -goq  @theme-pane-border-format "#{?pane_active,#[bg=colour125#,fg=white#,bold],#[fg=colour243]}   [#P] #{s/^[0-9]+\\.[0-9]+\\.[0-9]+$/claude/:pane_current_command}   #[bg=default]"
 set -goq  @theme-pane-border-indicators off
+set -goq  @theme-pane-border-lines single
 set -goqF @theme-status-bg "#{@powerline-status-bg}"
 set -goqF @theme-status-fg "#{@powerline-status-fg}"
 set -goq  @theme-status-interval 1
@@ -165,6 +166,7 @@ set -gwF pane-active-border-style "fg=#{@theme-pane-active-border-fg},bg=#{@them
 set -gwF pane-border-style "fg=#{@theme-pane-border-fg},bg=#{@theme-pane-border-bg}"
 set -gwF pane-border-format "#{@theme-pane-border-format}"
 set -gwF pane-border-indicators "#{@theme-pane-border-indicators}"
+set -gwF pane-border-lines "#{@theme-pane-border-lines}"
 set -gwF window-status-activity-style "fg=#{@theme-window-status-activity-fg},bg=#{@theme-window-status-activity-bg}"
 set -gwF window-status-current-format "#{@theme-window-status-current-format}"
 set -gwF window-status-current-style "fg=#{@theme-window-status-current-fg},bg=#{@theme-window-status-current-bg}"
