@@ -12,3 +12,12 @@ git clone https://github.com/solomonxie/tmuxedo.git ~/.config/tmux
 ```
 
 Existing symlinks are replaced; real files at a target path are moved to `<path>.bak.<timestamp>`.
+
+## Mini
+
+`tmux-mini.conf` is a self-contained `~/.tmux.conf` without plugins or the theme, for servers and older tmux.
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/solomonxie/tmuxedo/master/tmux-mini.conf -o ~/.tmux.conf
+# or, with the repo cloned: ~/.config/tmux/install.sh mini
+```

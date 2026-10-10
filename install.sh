@@ -12,6 +12,12 @@ link() {  # link <path in repo, empty = repo root> <dest>
   echo "linked $dest -> $src"
 }
 
-# tmux reads ~/.tmux.conf before ~/.config/tmux/tmux.conf; move it aside so ours wins.
-if [ -L ~/.tmux.conf ]; then rm ~/.tmux.conf; elif [ -e ~/.tmux.conf ]; then mv ~/.tmux.conf ~/.tmux.conf.bak.$(date +%Y%m%d%H%M%S); fi
-link "" ~/.config/tmux
+# install.sh       the full config at ~/.config/tmux
+# install.sh mini  no plugins or theme (e.g. a Linux server): ~/.tmux.conf -> tmux-mini.conf
+if [ "${1:-}" = mini ]; then
+  link tmux-mini.conf ~/.tmux.conf
+else
+  # tmux reads ~/.tmux.conf before ~/.config/tmux/tmux.conf; move it aside so ours wins.
+  if [ -L ~/.tmux.conf ]; then rm ~/.tmux.conf; elif [ -e ~/.tmux.conf ]; then mv ~/.tmux.conf ~/.tmux.conf.bak.$(date +%Y%m%d%H%M%S); fi
+  link "" ~/.config/tmux
+fi
