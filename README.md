@@ -7,8 +7,8 @@ Links the repo to `~/.config/tmux` and moves an existing `~/.tmux.conf` aside, s
 ## Install
 
 ```sh
-git clone https://github.com/solomonxie/tmuxedo.git ~/myconf/tmuxedo
-~/myconf/tmuxedo/install.sh
+git clone https://github.com/solomonxie/tmuxedo.git ~/.dotfiles/tmuxedo
+~/.dotfiles/tmuxedo/install.sh
 ```
 
-Anything already at a target path is moved to `<path>.bak.<timestamp>`.
+Existing symlinks are replaced; real files at a target path are moved to `<path>.bak.<timestamp>`.
